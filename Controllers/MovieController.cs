@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,15 +22,15 @@ namespace MoviePortal.Controllers
         }
 
         // GET: api/Movie
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
+        [HttpGet,Authorize]
+        public async Task<ActionResult<IEnumerable<MovieModel>>> GetMovie()
         {
             return await _context.Movie.ToListAsync();
         }
 
         // GET: api/Movie/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movie>> GetMovie(int id)
+        public async Task<ActionResult<MovieModel>> GetMovie(int id)
         {
             var movie = await _context.Movie.FindAsync(id);
 
@@ -45,7 +46,7 @@ namespace MoviePortal.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovie(int id, Movie movie)
+        public async Task<IActionResult> PutMovie(int id, MovieModel movie)
         {
             if (id != movie.Id)
             {
@@ -77,7 +78,7 @@ namespace MoviePortal.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+        public async Task<ActionResult<MovieModel>> PostMovie(MovieModel movie)
         {
             _context.Movie.Add(movie);
             await _context.SaveChangesAsync();
@@ -88,7 +89,7 @@ namespace MoviePortal.Controllers
 
         // DELETE: api/Movie/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Movie>> DeleteMovie(int id)
+        public async Task<ActionResult<MovieModel>> DeleteMovie(int id)
         {
             var movie = await _context.Movie.FindAsync(id);
             if (movie == null)

@@ -13,12 +13,12 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
 import { LoginComponent } from './login/login.component';
-
+import { AccountService } from './Services/account-service.service';
 
 let config = new AuthServiceConfig([
   {
      id: GoogleLoginProvider.PROVIDER_ID,
-     provider: new GoogleLoginProvider("586403743143-bnts86rbeosuas8vc8gni035u1rj678i.apps.googleusercontent.com")
+     provider: new GoogleLoginProvider("586403743143-vqc0jcjsuu3i0pnju6mumbrct2qp6r03.apps.googleusercontent.com")
   },
 ]);
 export function provideConfig()
@@ -47,10 +47,13 @@ export function provideConfig()
       { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [{
+  providers: [
+    {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
-  }],
+      useFactory: provideConfig,
+    },
+    AccountService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

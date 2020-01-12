@@ -9,6 +9,7 @@ namespace MoviePortal.Models
         {
         }
 
-        public DbSet<Movie> Movie { get; set; }
+        public DbSet<MovieModel> Movie { get; set; }
+        public DbSet<LoginModel> Login { get; set; }
     }
 }
