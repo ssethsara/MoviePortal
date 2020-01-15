@@ -30,5 +30,35 @@ export class AccountService {
     return this.http.get(UrlMovies, { headers: reqHeader });
 
   }
+
+  PostMovies(movie) {
+    let UrlMovies = 'api/Movie';
+    var reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+     // 'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT')
+    });
+
+    let data={
+      "name":"",
+      "description":"",
+      "genres":"",
+      "released_Year":"",
+      "rating":0.0,
+      "coverImage":""
+    }
+    
+
+    data.name=movie.name;
+    data.description=movie.description;
+    data.genres=movie.genres;
+    data.released_Year=movie.released_Year;
+    data.rating=+movie.rating;
+    data.coverImage=movie.coverImage;
+
+    
+    return this.http.post<any>(UrlMovies,data,{ headers: reqHeader })
+   
+
+  }
   
 }

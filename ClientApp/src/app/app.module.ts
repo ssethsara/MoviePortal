@@ -2,19 +2,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { NavMenuComponent } from './Component/nav-menu/nav-menu.component';
+import { HomeComponent } from './Component/home/home.component'; 
 
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './Component/login/login.component';
 import { AccountService } from './Services/account-service.service';
+import { AppRoutingModule } from './app-routing.module';
+import { AddMovieComponent } from './Component/add-movie/add-movie.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/';
+import { MovieDescriptionComponent } from './movie-description/movie-description.component'; 
 let config = new AuthServiceConfig([
   {
      id: GoogleLoginProvider.PROVIDER_ID,
@@ -32,20 +40,21 @@ export function provideConfig()
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    LoginComponent
+    LoginComponent,
+    AddMovieComponent,
+    MovieDescriptionComponent
   ],
   imports: [
+    
     SocialLoginModule.initialize(config),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatInputModule,MatSelectModule,MatCardModule,MatFormFieldModule,MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
   providers: [
     {

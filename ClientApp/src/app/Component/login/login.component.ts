@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 ///some other imports
 import { AuthService } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-import { AccountService } from '../Services/account-service.service';
+import { AccountService } from '../../Services/account-service.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,9 @@ export class LoginComponent implements OnInit {
   userData: any [] = [];
   // create a field to hold error messages so we can bind it to our        template
   resultMessage: string;
-  constructor(private accountService: AccountService, private authService: AuthService ) { }
+  constructor(private accountService: AccountService, private authService: AuthService,private route: Router) { }
   ngOnInit() {
+    
       //some code
     }
 
@@ -41,7 +43,7 @@ logInWithGoogle(platform: string): void {
         result => {
           localStorage.setItem('tokenJWT', result.tokenJWT);
           console.log('success', result);
-        //  this.route.navigate(['/home']);
+          this.route.navigate(['/']);
         },
     error => {
           this.resultMessage = 'it didn\'t work and that sucks';
@@ -53,26 +55,6 @@ logInWithGoogle(platform: string): void {
      console.log(error);
      this.resultMessage = error;
     });
-  }
-
-  logOut(): void {
-
-    localStorage.removeItem('tokenJWT');
-    this.authService.signOut();
-    console.log('User has signed our');
-  }
-
-  getMovies():void{
-    this.accountService.GetMovies().subscribe(
-      result => {
-        console.log('success', result);
-      //  this.route.navigate(['/home']);
-      },
-      error => {
-        this.resultMessage = 'Get Movies Did not worked';
-        console.log(error);
-       }
-    );
   }
 
 

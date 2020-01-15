@@ -1,4 +1,5 @@
 using System;
+
 namespace MoviePortal.Models
 {
     public class MovieModel

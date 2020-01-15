@@ -1,0 +1,51 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Add Movie</mat-card-title>
+    </mat-card-header>
+    <form  #MovieAdd="ngForm" (ngSubmit)="onClickSubmit()">
+        <mat-card-content>
+         
+                <mat-form-field>
+                    <mat-label>Movie Name</mat-label>
+                    <input matInput placeholder="Movie Name" [(ngModel)]="movie.name" name="movieName" required>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Movie Description</mat-label>
+                    <textarea [(ngModel)]="movie.description" name="movieDesc" matInput></textarea>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Release Date</mat-label>
+                    <input  [value]="date.value" name="movieReleaseDate"  matInput [matDatepicker]="myPicker"  placeholder="Release Date">
+                    <mat-datepicker-toggle  matSuffix [for]="myPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #myPicker></mat-datepicker>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Genre</mat-label>
+                    <mat-select [(value)]="movie.genres" name="movieGenre" placeholder="Genre">
+                        <mat-option value="email">Action</mat-option>
+                        <mat-option value="website">Comedy</mat-option>
+                        <mat-option value="direct">Horror</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Rating</mat-label>
+                    <input matInput placeholder="Rating" [(ngModel)]="movie.rating" name="rating" required>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Cover Image URL</mat-label>
+                    <input matInput placeholder="URL" [(ngModel)]="movie.coverImage" name="coverImage" required>
+                </mat-form-field>
+                <br>
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button md-button class="submit-btn" type="submit" [disabled]="!MovieAdd.form.valid">Save Movie</button>
+        </mat-card-actions>
+    </form>
+    </mat-card>
+    
