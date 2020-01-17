@@ -1,26 +1,29 @@
 
-<button  (click)="logOut()" class="btn btn-success Facebook">Sign Out</button>
+<app-nav-menu></app-nav-menu>
 
 
-<app-add-movie></app-add-movie>
+<app-add-movie (addMovieEvent)="AddMovieEventHander()"></app-add-movie>
 
+<div class="arrangHorizontally">
+    <div *ngFor="let movie of movieList">
+        <mat-card class="example-card">
+            <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{movie.name}}</mat-card-title>
+            <mat-card-subtitle>{{movie.genres}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="{{movie.coverImage}}" alt="Photo of >{{movie.name}}">
+            <mat-card-content>
+            <p>
+                {{movie.description}}
+            </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <b>Rating:</b> <p>{{movie.rating}}</p>
+                <b>Released Date:</b><p>{{movie.released_Year|date: 'dd/MM/yyyy'}}</p>
+                <button class="btn btn-danger" (click)="removeMovie(movie.id)">Remove</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 
-<mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+</div>

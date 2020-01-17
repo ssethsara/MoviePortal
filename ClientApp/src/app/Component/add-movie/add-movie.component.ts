@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output ,EventEmitter } from '@angular/core';
 import { FormGroup, FormControl,FormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
@@ -19,6 +19,9 @@ export class AddMovieComponent implements OnInit {
   date=new Date();
   resultMessage;
 
+  @Output() addMovieEvent = new EventEmitter<string>();
+
+
   constructor(private accountService: AccountService,private route: Router ) { }
 
   ngOnInit() {
@@ -38,7 +41,7 @@ export class AddMovieComponent implements OnInit {
         this.movie.rating=0;
         this.movie.released_Year="";
 
-      //  this.route.navigate(['/home']);
+        this.addMovieEvent.emit();
       },
       error => {
         this.resultMessage = 'Post Movies Did not worked';

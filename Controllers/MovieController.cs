@@ -45,7 +45,7 @@ namespace MoviePortal.Controllers
         // PUT: api/Movie/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
+        [HttpPut("{id}"),Authorize]
         public async Task<IActionResult> PutMovie(int id, MovieModel movie)
         {
             if (id != movie.Id)
@@ -77,7 +77,7 @@ namespace MoviePortal.Controllers
         // POST: api/Movie
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
+        [HttpPost,Authorize]
         public async Task<ActionResult<MovieModel>> PostMovie(MovieModel movie)
         {
             _context.Movie.Add(movie);
@@ -88,7 +88,7 @@ namespace MoviePortal.Controllers
         }
 
         // DELETE: api/Movie/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"),Authorize]
         public async Task<ActionResult<MovieModel>> DeleteMovie(int id)
         {
             var movie = await _context.Movie.FindAsync(id);

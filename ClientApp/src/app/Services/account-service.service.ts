@@ -35,7 +35,7 @@ export class AccountService {
     let UrlMovies = 'api/Movie';
     var reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
-     // 'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT')
+      'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT')
     });
 
     let data={
@@ -57,8 +57,20 @@ export class AccountService {
 
     
     return this.http.post<any>(UrlMovies,data,{ headers: reqHeader })
-   
+  
+  }
 
+
+
+  DeleteMovies(id) {
+    let UrlMovies = 'api/Movie/'+id;
+    var reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT')
+    });
+    
+    return this.http.delete<any>(UrlMovies,{ headers: reqHeader})
+  
   }
   
 }
